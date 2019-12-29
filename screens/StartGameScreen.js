@@ -1,45 +1,60 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Text, View, StyleSheet, Button,
+  Text, View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
 
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Colors from '../constants/colors';
 
-const StartGameScreen = (props) => (
-  <View style={styles.screen}>
-    <Text style={styles.title}>Novo Jogo</Text>
-    <Card style={styles.inputContainer}>
-      <Text>Selecionar</Text>
-      <Input
-        style={styles.input}
-        blurOnSubmit
-        autoCapitalize="none"
-        autoCorrect={false}
-        keyboardType="number-pad"
-        maxLength={2}
-      />
-      <View style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Button
-            title="Reset"
-            color={Colors.accent}
-            onPress={() => {}}
+
+const StartGameScreen = (props) => {
+  const [enteredValue, setEnteredValue] = useState('');
+  const numberInputHandler = (inputText) => {
+    setEnteredValue(inputText.replace(/\D/g, ''));
+  };
+  return (
+    <TouchableWithoutFeedback onPress={() => {
+      Keyboard.dismiss();
+    }}
+    >
+      <View style={styles.screen}>
+        <Text style={styles.title}>Novo Jogo</Text>
+        <Card style={styles.inputContainer}>
+          <Text>Selecionar</Text>
+          <Input
+            style={styles.input}
+            blurOnSubmit
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="number-pad"
+            maxLength={2}
+            onChangeText={numberInputHandler}
+            value={enteredValue}
           />
-        </View>
-        <View style={styles.button}>
-          <Button
-            title="Confirmar"
-            color={Colors.primary}
-            onPress={() => {}}
-          />
-        </View>
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button
+                title="Reset"
+                color={Colors.accent}
+                onPress={() => { }}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                title="Confirmar"
+                color={Colors.primary}
+                onPress={() => { }}
+              />
+            </View>
+          </View>
+        </Card>
       </View>
-    </Card>
-  </View>
-);
+    </TouchableWithoutFeedback>
+  );
+};
+
 
 const styles = StyleSheet.create({
   screen: {
