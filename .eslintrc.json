@@ -84,6 +84,7 @@
         // ],
 
         //"react-native/no-inline-styles": 0,
+        "react/jsx-props-no-spreading": 0,
         "react/jsx-max-props-per-line": [
             1,
             {

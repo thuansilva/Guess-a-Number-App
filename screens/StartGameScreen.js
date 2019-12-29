@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import {
-  Text, View, StyleSheet, Button, TextInput,
+  Text, View, StyleSheet, Button,
 } from 'react-native';
 
 import Card from '../components/Card';
+import Input from '../components/Input';
 import Colors from '../constants/colors';
 
 const StartGameScreen = (props) => (
@@ -12,7 +13,14 @@ const StartGameScreen = (props) => (
     <Text style={styles.title}>Novo Jogo</Text>
     <Card style={styles.inputContainer}>
       <Text>Selecionar</Text>
-      <TextInput />
+      <Input
+        style={styles.input}
+        blurOnSubmit
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="number-pad"
+        maxLength={2}
+      />
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
           <Button
@@ -57,6 +65,10 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 100,
+  },
+  input: {
+    width: 50,
+    textAlign: 'center',
   },
 });
 
