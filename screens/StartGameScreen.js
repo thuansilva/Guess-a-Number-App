@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
-  Text, View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard,
+  Text, View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert,
 } from 'react-native';
 
 import Card from '../components/Card';
@@ -10,10 +9,36 @@ import Colors from '../constants/colors';
 
 
 const StartGameScreen = (props) => {
-  const [enteredValue, setEnteredValue] = useState('');
+  const [enteredValue, setEnteredValue] = useState('')
+  const [cofirmed, setConfirmed] = useState(false);
+  const [selectedNumber, setSelectedNumber] = useState();
   const numberInputHandler = (inputText) => {
     setEnteredValue(inputText.replace(/\D/g, ''));
   };
+
+  const resetInputHandler = () => {
+    setEnteredValue('');
+    setConfirmed(false);
+  };
+
+  const confirmInputHandler = () => {
+    const choseNumber = parseInt(enteredValue);
+    if (isNaN(choseNumber) || choseNumber <= 0 || choseNumber > 99) {
+      Alert.alert('Número Inválido',
+        'O número deve estar entre 1 e 99',
+        [{ text: 'Entendi', style: 'destructive', onPress: resetInputHandler }]);
+      return;
+    }
+    setConfirmed(true);
+    setSelectedNumber(choseNumber);
+    setEnteredValue('');
+  };
+
+  let confrimatedOutput;
+
+  if (cofirmed) {
+    confrimatedOutput = <Text> Numero Escolhido: {selectedNumber}</Text>;
+  }
   return (
     <TouchableWithoutFeedback onPress={() => {
       Keyboard.dismiss();
@@ -38,18 +63,19 @@ const StartGameScreen = (props) => {
               <Button
                 title="Reset"
                 color={Colors.accent}
-                onPress={() => { }}
+                onPress={resetInputHandler}
               />
             </View>
             <View style={styles.button}>
               <Button
                 title="Confirmar"
                 color={Colors.primary}
-                onPress={() => { }}
+                onPress={confirmInputHandler}
               />
             </View>
           </View>
         </Card>
+        {confrimatedOutput}
       </View>
     </TouchableWithoutFeedback>
   );
