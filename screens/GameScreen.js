@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
-  StyleSheet, View, Text, Button,
+  StyleSheet, View, Text, Button, Alert,
 } from 'react-native';
 
 import Card from '../components/Card';
@@ -20,6 +20,35 @@ const GameScreen = (props) => {
   const [currentGuess, setCurrentGuess] = useState(
     generateRandomBetween(1, 100, props.userChoice),
   );
+  const [rounds, setRounds] = useState(0);
+  const currentLow = useRef(1);
+  const currentHigh = useRef(100);
+
+  const { userChoice, onGameOver } = props;
+
+  useEffect(() => {
+    if (currentGuess === props.userChoice) {
+      onGameOver(rounds);
+    }
+  }, [currentGuess, userChoice, onGameOver]);
+
+  const nextGuessHandler = (direction) => {
+    if ((direction === 'lower' && currentGuess < props.userChoice)
+            || (direction === 'greater' && currentGuess > props.userChoice)) {
+      Alert.alert('não minta!', 'Voce agora está perto...', [{ text: 'Desculpa!', style: 'cancel' }]);
+      return;
+    }
+    if (direction === 'lower') {
+      currentHigh.current = currentGuess;
+    } else {
+      currentLow.current = currentGuess;
+    }
+
+    const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
+    setCurrentGuess(nextNumber);
+    setRounds((curRounds) => curRounds + 1);
+  };
+
   return (
     <View style={styles.screen}>
       <Text>Adivinhar</Text>
@@ -27,11 +56,11 @@ const GameScreen = (props) => {
       <Card style={styles.buttonContainer}>
         <Button
           title="Baixo"
-          onPress={() => {}}
+          onPress={nextGuessHandler.bind(this, 'lower')}
         />
         <Button
           title="Alto"
-          onPress={() => {}}
+          onPress={nextGuessHandler.bind(this, 'greater')}
         />
       </Card>
     </View>
