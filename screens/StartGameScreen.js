@@ -3,9 +3,11 @@ import {
   Text, View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert,
 } from 'react-native';
 
+import BodyText from '../components/BodyText';
 import Card from '../components/Card';
 import Input from '../components/Input';
 import NumberContainer from '../components/numberContainer';
+import TitleText from '../components/TitleText';
 import Colors from '../constants/colors';
 
 
@@ -41,7 +43,7 @@ const StartGameScreen = (props) => {
   if (cofirmed) {
     confrimatedOutput = (
       <Card style={styles.summaryContainer}>
-        <Text>Voce Selecionou</Text>
+        <BodyText>Voce Selecionou</BodyText>
         <NumberContainer>{selectedNumber}</NumberContainer>
         <Button
           title="Iniciar Jogo"
@@ -56,9 +58,9 @@ const StartGameScreen = (props) => {
     }}
     >
       <View style={styles.screen}>
-        <Text style={styles.title}>Novo Jogo</Text>
+        <TitleText style={styles.title}>Novo Jogo</TitleText>
         <Card style={styles.inputContainer}>
-          <Text>Selecionar</Text>
+          <BodyText>Selecionar</BodyText>
           <Input
             style={styles.input}
             blurOnSubmit
@@ -102,6 +104,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 10,
+    fontFamily: 'open-sans-bold',
 
   },
   inputContainer: {

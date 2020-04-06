@@ -5,6 +5,7 @@ import {
 
 import Card from '../components/Card';
 import NumberContainer from '../components/numberContainer';
+import DefaultStyles from '../constants/default-styles';
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -34,7 +35,7 @@ const GameScreen = (props) => {
 
   const nextGuessHandler = (direction) => {
     if ((direction === 'lower' && currentGuess < props.userChoice)
-            || (direction === 'greater' && currentGuess > props.userChoice)) {
+      || (direction === 'greater' && currentGuess > props.userChoice)) {
       Alert.alert('não minta!', 'Voce agora está perto...', [{ text: 'Desculpa!', style: 'cancel' }]);
       return;
     }
@@ -51,7 +52,7 @@ const GameScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <Text>Adivinhar</Text>
+      <Text style={DefaultStyles.bodyText}>Adivinhar</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
         <Button
