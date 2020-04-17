@@ -10,8 +10,8 @@ import GameScreen from './screens/GameScreen';
 import StartGameScreen from './screens/StartGameScreen';
 
 
-const fetchFonts = () => {
-  Font.loadAsync({
+const fetchFonts = async () => {
+  await Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
 
@@ -27,7 +27,7 @@ export default function App() {
     return <AppLoading
       startAsync={fetchFonts}
       onFinish={() => setDadaLoaded(true)}
-      onError={(err) => console.log(err)}
+      onError={(err) => err}
     />;
   }
 

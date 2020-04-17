@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Text, View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert,
+  View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert,
 } from 'react-native';
 
 import BodyText from '../components/BodyText';

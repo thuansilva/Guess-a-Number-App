@@ -62,6 +62,8 @@
         ],
         // "import/prefer-default-export": "off",
         "global-require": "off",
+        //disabilitar o console.log 
+        // "no-console": "off",
         // "no-unused-expressions": [
         //     "error",
         //     {
