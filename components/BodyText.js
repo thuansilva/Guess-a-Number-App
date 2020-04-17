@@ -1,12 +1,15 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
-const BodyText = (props) => <Text style={styles.title}>{props.children} </Text>;
+const BodyText = (props) => (
+  <Text
+    style={{ ...styles.body, ...props.style }}
+  > {props.children}
+  </Text>);
 
 const styles = StyleSheet.create({
-  title: {
-    fontFamily: 'open-sans-bold',
-    fontSize: 18,
+  body: {
+    fontFamily: 'open-sans',
   },
 });
 
